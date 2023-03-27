@@ -1,7 +1,8 @@
 const express = require('express');
-const hollywoodApi = require('../Api/Hollywood');
+const foodApi = require('../Api/Hollywood');
 
-const hollywood = express.Router();
-hollywood.route('/hollywood').get(hollywoodApi.apiController);
+const router = express.Router();
+router.post('/hollywood', foodApi.hollywoodDataInsertToDb);
+router.get('/hollywood', foodApi.hollywoodDataFindFromDb);
 
-module.exports = hollywood;
+module.exports = router;

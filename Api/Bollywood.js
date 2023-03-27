@@ -1,24 +1,28 @@
-const get = (req, res) => {
-    res.send([
-        {
-            img: 'assets/first-movie.jfif',
-            title: 'KESARI',
-            description: 'Ishar Singh is a havildar in the Sikh Regiment of the British Indian Army. His superior and commander is an arrogant British officer, who deems all Indians to be cowards, and is jealous of Ishar Singh because of his superior fighting skills.',
-            releaseDate: '21 March 2019'
-        },
-        {
-            img: 'assets/second-movie.jpg',
-            title: 'URI',
-            description: 'The first chapter opens up with an ambush in June 2015 on the convoy of the Indian Army troops in Chandel, Manipur by NSCN(K) militants. In retaliation, Major Vihaan Singh Shergill, a Para SF officer and his unit, including his brother-in-law, Major Karan Kashyap, infiltrate and attack the Northeastern militants and also kill the key leader responsible for the ambush.',
-            releaseDate: '11 January 2019'
-        },
-        {
-            img: 'assets/third-movie.jpg',
-            title: 'GOVINDA MERA NAAM',
-            description: 'The very charming Govinda Waghmare juggles his time and love between his wife Mrs. Waghmare and his girlfriend in this dose of chaos, confusion, and laughter.',
-            releaseDate: '16 December 2022'
-        }
-    ])
+
+const mongoClient = require("../database/connection");
+const collectionName = "bollywood";
+
+const bollywoodDataInsertToDb = async(req, res) => {
+    const bollywoodData = req.body;
+    try {
+        const result = await mongoClient.insertToDB(bollywoodData, collectionName);
+        console.log("The result of databse operation =>", result);
+        return res.status(200).send(result);
+    } catch(error) {
+        console.log("Something went wrong while performing db opeartion");
+        return res.status(500).send({message: "Something went wrong while performing the operation"})
+    }
 }
 
-module.exports.apiController = get
+const bollywoodDataFindFromDb = async(req, res) => {
+    try {
+        const result = await mongoClient.findFromDB(collectionName);
+        console.log("The result of databse operation =>", result);
+        return res.status(200).send(result);
+    } catch(error) {
+        console.log("Something went wrong while performing db opeartion");
+        return res.status(500).send({message: "Something went wrong while performing the operation"})
+    }
+}
+
+module.exports = { bollywoodDataInsertToDb, bollywoodDataFindFromDb } 

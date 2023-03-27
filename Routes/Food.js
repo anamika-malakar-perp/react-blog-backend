@@ -1,7 +1,8 @@
 const express = require('express');
 const foodApi = require('../Api/Food');
 
-const food = express.Router();
-food.route('/food').get(foodApi.apiController);
+const router = express.Router();
+router.post('/food', foodApi.foodDataInsertToDb);
+router.get('/food', foodApi.foodDataFindFromDb);
 
-module.exports = food;
+module.exports = router;

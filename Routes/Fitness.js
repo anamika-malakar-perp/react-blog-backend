@@ -1,7 +1,8 @@
 const express = require('express');
 const fitnessApi = require('../Api/Fitness');
 
-const fitness = express.Router();
-fitness.route('/fitness').get(fitnessApi.apiController);
+const router = express.Router();
+router.post('/fitness', fitnessApi.fitnessDataInsertToDb);
+router.get('/fitness', fitnessApi.fitnessDataFindFromDb);
 
-module.exports = fitness;
+module.exports = router;

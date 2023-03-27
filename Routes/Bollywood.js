@@ -1,7 +1,8 @@
 const express = require('express');
 const bollywoodApi = require('../Api/Bollywood');
 
-const bollywood = express.Router();
-bollywood.route('/bollywood').get(bollywoodApi.apiController);
+const router = express.Router();
+router.post('/bollywood', bollywoodApi.bollywoodDataInsertToDb);
+router.get('/bollywood', bollywoodApi.bollywoodDataFindFromDb);
 
-module.exports = bollywood;
+module.exports = router;

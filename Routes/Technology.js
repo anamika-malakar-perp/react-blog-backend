@@ -1,7 +1,8 @@
 const express = require('express');
 const technologyApi = require('../Api/Technology');
 
-const technology = express.Router();
-technology.route('/technology').get(technologyApi.apiController);
+const router = express.Router();
+router.post('/technology', technologyApi.technologyDataInsertToDb);
+router.get('/technology', technologyApi.technologyDataFindFromDb);
 
-module.exports = technology;
+module.exports = router;

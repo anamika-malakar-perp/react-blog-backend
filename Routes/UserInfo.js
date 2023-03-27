@@ -1,7 +1,8 @@
 const express = require('express');
-const userApi = require('../Api/UserInfo');
+const userInfoApi = require('../Api/UserInfo');
 
-const userinfo = express.Router();
-userinfo.route('/userinfo').get(userApi.apiController);
+const router = express.Router();
+router.post('/userinfo', userInfoApi.userInfoDataInsertToDb);
+router.get('/userinfo', userInfoApi.userInfoDataFindFromDb);
 
-module.exports = userinfo;
+module.exports = router;
