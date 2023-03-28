@@ -44,7 +44,7 @@ const fitnessDataFindFromDb = async(req, res) => {
     try {
         const dbResponse = await Fitness.find({});
         console.log("Data is saved =>", dbResponse)
-        return res.status(200).send({message: dbResponse})
+        return res.status(200).send(dbResponse)
     } catch(err) {
         console.log("Error while oprating on db =>", error.message);
         return res.status(500).send({message: "Error while operating on db"})
